@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="form.css"/>
+        
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+     <script type="text/javascript" src="check.js"></script>
+
+      
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    </head>
+    <body>
+       <div class="container-fluid">
+       <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+         <a class="navbar-brand" href="#" style="color: white;height: 40px;"></a>
+        
+          </nav>
+    </div>
+     <!-- <p class=" text-center py-2" style="color: white">© 2020 Copyright:<a href="#" > gargkunal01@gmail.com</a></p> -->
+  <!--  <div class="container-fluid">
+       <nav class="navbar navbar-expand-lg fixed-bottom" style="background-color: #45468D">
+  <p class=" text-center py-2" style="color: white">© 2020 Copyright:<a href="#" > gargkunal01@gmail.com</a></p>
+      </nav>
+</div> -->
+        <div class="container" style="margin-top: 70px;" id="formme">
+            <div class="display-4 text-center">Login</div>
+            <form class="form-group" onsubmit="return false">
+  
+         <label for="exampleInputEmail1">Email address</label> 
+         <input type="email" reqiured placeholder="Email" class="form-control" id="Email" aria-describedby="emailHelp"><br>
+         <label for="exampleInputPassword1">Password</label>
+         <input type="password" required placeholder="Password" class="form-control" id="Password"><br>
+        <button  type="submit" onclick="call();" class="btn btn-primary"> Login</button>
+
+    </form><br><br>
+      <div class="spinner-border text-primary" style="display: none" id="spinner">
+    <span class="sr-only">Loading...</span></div><br><br>
+<div class="text-center bg-primary" id="button"><button id="btn"  onclick="main1();">No Acccount..Register Here</button></div>
+        </div>
+        <!-- Register -->
+        <div class="container" style="display:none;margin-top: 70px;" id="showme">
+            <div class="display-4 text-center">Register</div>
+             <form onsubmit="return false">
+  <div class="form-group">
+    <label for="exampleInputPassword1">Name</label>
+    <input type="text" class="form-control" id="name">
+ 
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="pwd">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" onclick="register();"  class="btn btn-primary">Register</button>
+</form><br>
+ <div class="spinner-border text-primary" style="display:none" id="spinners">
+    <span class="sr-only">Loading...</span></div><br>
+<div class="text-center bg-primary" id="button"><button id="btn"  onclick="done();">Login</button></a></div>
+        </div>
+        </div>
+         </div>
+<div class="container-fluid navbar" style="margin-top: 80px;">
+<p class=" text-center py-2" style="color: white">© 2020 Copyright:<a href="#" > gargkunal01@gmail.com</a></p>
+</div> 
+
+<!-- <script type="text/javascript" src="form.js"></script> --> 
+<script type="text/javascript">
+            var firebaseConfig = {
+    apiKey: "AIzaSyC84sXhXVbVrWLM7nUQ9LckJPA1tRmeXRc",
+    authDomain: "test-app-6ba7b.firebaseapp.com",
+    databaseURL: "https://test-app-6ba7b.firebaseio.com",
+    projectId: "test-app-6ba7b",
+    storageBucket: "test-app-6ba7b.appspot.com",
+    messagingSenderId: "459885096824",
+    appId: "1:459885096824:web:2d2cf92b394f1f1300228d",
+    measurementId: "G-MBDL44LVKY"
+  };
+  firebase.initializeApp(firebaseConfig);
+  
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+ <script type="text/javascript" src="index.js"></script>      
+    </body>
+
+</html

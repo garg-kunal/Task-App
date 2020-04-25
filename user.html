@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Note App</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Styles.css"/>
+        
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    </head>
+    <body>
+       <!-- navbar -->
+      <div class="container-fluid">
+       <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="#" style="color: white;">Task-App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html" style="color: white;">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="task.html" style="color: white;">Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="user.html" style="color: white;">Users</a>
+            </li>
+            
+            <li class="nav-item">
+            <div class="dropdown" style="background: transparent;">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <img src="download.png" class="img-fluid "  style="height:30px" />
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item text-center" href="#"><p id="email">....</p></a>
+    <a class="dropdown-item text-center" href="#"><p id="name">name..</p></a>
+    <a href="#" class="dropdown-item text-center"><button class="btn" onclick="logout();">Logout</button></a>
+
+
+  </div>
+              
+            </li>
+          </ul>
+          
+        </div>
+      </nav>
+    </div> 
+     <!-- add values -->
+
+     <div class="container" style="margin-top: 50px;">
+         <form class="form-group" method="" action="" onsubmit="return false">
+             <input type="text" required placeholder="User" value="" class="form-control" id="user" /><br>
+             <button  class="btn btn-primary" onclick="usersave();" >Add User</button>
+         </form>
+         <br>
+         <p class=""><b>Note:</b> Add User To Assign Task</p>
+        <div id="spinner" style="display: none;">
+      Saving is going on... Please Wait<div class="spinner-grow text-warning" >
+    <span class="sr-only">Loading...</span></div>
+    <div class="spinner-grow text-warning">
+    <span class="sr-only">Loading...</span></div></div>
+
+     </div>
+
+<div class="container-fluid">
+       <nav class="navbar navbar-expand-lg fixed-bottom text-center " style="background-color: #45468D">
+  <p class=" text-center py-2" style="color: white">© 2020 Copyright:<a href="#" > gargkunal01@gmail.com</a></p>
+      </nav>
+</div>
+   
+
+
+<script>
+  
+        var firebaseConfig = {
+    apiKey: "AIzaSyC84sXhXVbVrWLM7nUQ9LckJPA1tRmeXRc",
+    authDomain: "test-app-6ba7b.firebaseapp.com",
+    databaseURL: "https://test-app-6ba7b.firebaseio.com",
+    projectId: "test-app-6ba7b",
+    storageBucket: "test-app-6ba7b.appspot.com",
+    messagingSenderId: "459885096824",
+    appId: "1:459885096824:web:2d2cf92b394f1f1300228d",
+    measurementId: "G-MBDL44LVKY"
+  };
+  firebase.initializeApp(firebaseConfig);
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="index.js"></script>   
+<script type="text/javascript">
+
+// var user=firebase.auth().currentuser;
+firebase.auth().onAuthStateChanged(async function (user) {
+     if (user!=null) {
+            window.user = user;
+            document.getElementById('email').innerHTML=user.email;
+            console.log(user.email);
+        firebase.firestore().collection('registers').where("email","==",user.email)
+      .onSnapshot(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            //console.log(doc.data().name);
+             document.getElementById('name').innerHTML=doc.data().name;
+        });
+    });
+ 
+            
+        } else{
+
+          window.location="login.html";
+           document.getElementById('navbar').style.display="none";
+        }
+        
+    });
+
+    </script>
+    
+
+</body>
+
+
+</html

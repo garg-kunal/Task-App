@@ -1,0 +1,26 @@
+#btn{
+	border:none;
+	background-color: transparent;
+	color:white;
+
+}
+#btn:hover{
+	transform: scale(1.2);
+	
+	color:white;
+}
+
+#button{
+	background-color: #45468D;
+	border-radius: 25px;
+	color: white;
+}
+
+.navbar{
+	background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+.display-4{
+	text-shadow: 2px 2px lightgrey;
+	z-index: 50;
+}
